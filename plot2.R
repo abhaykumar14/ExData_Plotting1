@@ -1,0 +1,11 @@
+setwd("C:/A_E_Drive/20_Course_Certification/50_Getting_N_Cleaning_Data")
+a<-read.table('household_power_consumption.txt', na.strings = '?',sep = ';',header = TRUE)
+b<-a
+b$Date<-strptime(b$Date, "%d/%m/%Y")
+b$Date<-as.Date(b$Date)
+c<-subset(b, Date == as.Date("2007-02-02") | Date == as.Date("2007-02-01"))
+c$e<-as.POSIXlt(paste(c$Date,c$Time))
+par(mfcol=c(1,1))
+with(c,plot(e,Global_active_power,type = 'l',xlab = '',ylab = 'Global Active Power (kilowatts)'))
+dev.copy(png,file='plot2.png')
+dev.off()
